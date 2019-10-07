@@ -1,4 +1,6 @@
 from route_helper import simple_route
+import requests
+
 
 GAME_HEADER = """
 <h1>Welcome to adventure quest!</h1>
@@ -61,6 +63,7 @@ def save_name(world: dict, monsters_name: str) -> str:
     :return:
     """
     world['name'] = monsters_name
+    print(world)
 
     return GAME_HEADER+"""You are in {where}, and you are nearby {monster_name}
     <br><br>

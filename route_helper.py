@@ -5,7 +5,6 @@ state being passed in and manipulated.
 This file also establishes the reset route, with the idea that everyone
 would like to be able to reset their game.
 """
-
 import json
 from functools import wraps
 
