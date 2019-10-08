@@ -1,5 +1,5 @@
 from route_helper import simple_route
-import requests
+from flask import render_template
 
 
 GAME_HEADER = """
@@ -14,10 +14,10 @@ def hello(world: dict) -> str:
     return render_template("entering.html")
 
 
-    return GAME_HEADER+"""You just entered CR and your tummy is grumbling.<br>
+    #return GAME_HEADER+"""You just entered CR and your tummy is grumbling.<br>
     
-    <a href="goto/takeout">Grab a take-out box</a><br>
-    <a href="goto/dinein">Dine in</a>"""
+   # <a href="goto/takeout">Grab a take-out box</a><br>
+   # <a href="goto/dinein">Dine in</a>"""
 
 
 ENCOUNTER_MONSTER = """
