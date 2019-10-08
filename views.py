@@ -3,8 +3,9 @@ import requests
 
 
 GAME_HEADER = """
-<h1>Welcome to adventure quest!</h1>
+<h1>Welcome to Caesar Rodney Dining Hall!</h1>
 <p>At any time you can <a href='/reset/'>reset</a> your game.</p>
+<hr>
 """
 
 
@@ -16,10 +17,10 @@ def hello(world: dict) -> str:
     :param world: The current world
     :return: The HTML to show the player
     """
-    return GAME_HEADER+"""You are in the Lair of the Corgis.<br>
+    return GAME_HEADER+"""You just entered CR and your tummy is grumbling.<br>
     
-    <a href="goto/lair">Go further into the lair.</a><br>
-    <a href="goto/entrance">Retreat.</a>"""
+    <a href="goto/takeout">Grab a take-out box</a><br>
+    <a href="goto/dinein">Dine in</a>"""
 
 
 ENCOUNTER_MONSTER = """
@@ -41,6 +42,8 @@ What is its name?
 
 @simple_route('/goto/<where>/')
 def open_door(world: dict, where: str) -> str:
+    if where == takeout
+        return GAME_HEADER+"All out of boxes"
     """
     Update the player location and encounter a monster, prompting the player
     to give them a name.
@@ -63,7 +66,6 @@ def save_name(world: dict, monsters_name: str) -> str:
     :return:
     """
     world['name'] = monsters_name
-    print(world)
 
     return GAME_HEADER+"""You are in {where}, and you are nearby {monster_name}
     <br><br>
