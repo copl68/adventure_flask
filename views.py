@@ -11,12 +11,9 @@ GAME_HEADER = """
 
 @simple_route('/')
 def hello(world: dict) -> str:
-    """
-    The welcome screen for the game.
+    return render_template("entering.html")
 
-    :param world: The current world
-    :return: The HTML to show the player
-    """
+
     return GAME_HEADER+"""You just entered CR and your tummy is grumbling.<br>
     
     <a href="goto/takeout">Grab a take-out box</a><br>
