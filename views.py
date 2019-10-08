@@ -42,8 +42,8 @@ What is its name?
 
 @simple_route('/goto/<where>/')
 def open_door(world: dict, where: str) -> str:
-    if where == takeout
-        return GAME_HEADER+"All out of boxes"
+   # if where == takeout:
+       # return GAME_HEADER+"All out of boxes"
     """
     Update the player location and encounter a monster, prompting the player
     to give them a name.
