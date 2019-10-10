@@ -25,14 +25,9 @@ What is its name?
 @simple_route('/goto/<where>/')
 def open_door(world: dict, where: str) -> str:
     if where == 'takeout':
-        '''
-        {% block input %}
-        <h6>CR ran out of boxes</h6><br>
-        <p>While the box-stocking man is being beaten in the back, you decide that you will stay to dine in</p><br>
-        <a href="goto/dinein">Grab a plate</a>
-        {% endblock %}
-        '''
-        return render_template("heading.html")
+        return render_template("no_boxes.html")
+    elif where == 'dinein':
+        world['']
     """
     Update the player location and encounter a monster, prompting the player
     to give them a name.
