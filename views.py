@@ -1,24 +1,9 @@
 from route_helper import simple_route
 from flask import render_template
 
-
-GAME_HEADER = """
-<h1>Welcome to Caesar Rodney Dining Hall!</h1>
-<p>At any time you can <a href='/reset/'>reset</a> your game.</p>
-<hr>
-"""
-
-
 @simple_route('/')
 def hello(world: dict) -> str:
     return render_template("entering.html")
-
-
-    #return GAME_HEADER+"""You just entered CR and your tummy is grumbling.<br>
-    
-   # <a href="goto/takeout">Grab a take-out box</a><br>
-   # <a href="goto/dinein">Dine in</a>"""
-
 
 ENCOUNTER_MONSTER = """
 <!-- Curly braces let us inject values into the string -->
@@ -39,8 +24,15 @@ What is its name?
 
 @simple_route('/goto/<where>/')
 def open_door(world: dict, where: str) -> str:
-   # if where == takeout:
-       # return GAME_HEADER+"All out of boxes"
+    if where == 'takeout':
+        '''
+        {% block input %}
+        <h6>CR ran out of boxes</h6><br>
+        <p>While the box-stocking man is being beaten in the back, you decide that you will stay to dine in</p><br>
+        <a href="goto/dinein">Grab a plate</a>
+        {% endblock %}
+        '''
+        return render_template("heading.html")
     """
     Update the player location and encounter a monster, prompting the player
     to give them a name.
