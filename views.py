@@ -27,7 +27,8 @@ def open_door(world: dict, where: str) -> str:
     if where == 'takeout':
         return render_template("no_boxes.html")
     elif where == 'dinein':
-        world['']
+        world['food1'] = None
+        world['fppd2'] = None
     """
     Update the player location and encounter a monster, prompting the player
     to give them a name.
