@@ -1,5 +1,6 @@
 from route_helper import simple_route
-from flask import render_template
+from flask import render_template, Markup
+
 
 @simple_route('/')
 def hello(world: dict) -> str:
@@ -25,10 +26,14 @@ What is its name?
 @simple_route('/goto/<where>/')
 def open_door(world: dict, where: str) -> str:
     if where == 'takeout':
-        return render_template("no_boxes.html")
+        text = Markup('''<p>CR ran out of boxes</p>
+    <p>While the box-stocking man is being beaten in the back, you decide that you will stay to dine in</p>
+    <a href="/goto/dinein">Grab a plate</a>''')
+        return render_template("heading.html", code=text)
     elif where == 'dinein':
         world['food1'] = None
-        world['fppd2'] = None
+        world['food2'] = None
+        world['food3'] = None
     """
     Update the player location and encounter a monster, prompting the player
     to give them a name.
