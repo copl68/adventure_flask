@@ -37,15 +37,12 @@ def open_door(world: dict, where: str) -> str:
 
 @simple_route('/search_food/<food>/')
 def search_food(world: dict, food: str):
-    #return Markup('<p> Your food is {food} </p>'.format(food=food))
     response = requests.get('https://www.themealdb.com/api/json/v1/1/search.php?s=' + food)
     data = json.loads(response.text)
-    null = None
     possible_foods = " "
     for meal in data['meals']:
         possible_foods = possible_foods + "<p>" + (meal['strMeal']) + "</p>"
     return render_template("heading.html", code=Markup(possible_foods))
-
 
 @simple_route("/save/name/")
 def save_name(world: dict, monsters_name: str) -> str:
