@@ -31,21 +31,11 @@ def open_door(world: dict, where: str) -> str:
     <a href="/goto/dinein">Grab a plate</a>''')
         return render_template("heading.html", code=text)
     elif where == 'dinein':
-        world['food1'] = None
-        world['food2'] = None
-        world['food3'] = None
-        return render_template('search_food.html')
-    """
-    Update the player location and encounter a monster, prompting the player
-    to give them a name.
+        return render_template('get_food.html')
 
-    :param world: The current world
-    :param where: The new location to move to
-    :return: The HTML to show the player
-    """
-    world['location'] = where
-    return GAME_HEADER+ENCOUNTER_MONSTER.format(where)
-
+@simple_route('/search_food/<food>/')
+def search_food(world: dict, food: str):
+    return Markup('<p> Your food is {food} </p>'.format(food=food))
 
 @simple_route("/save/name/")
 def save_name(world: dict, monsters_name: str) -> str:
