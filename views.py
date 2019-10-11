@@ -34,6 +34,7 @@ def open_door(world: dict, where: str) -> str:
         world['food1'] = None
         world['food2'] = None
         world['food3'] = None
+        return render_template('search_food.html')
     """
     Update the player location and encounter a monster, prompting the player
     to give them a name.
