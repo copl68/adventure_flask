@@ -8,23 +8,6 @@ from flask import render_template, Markup
 def hello(world: dict) -> str:
     return render_template("entering.html")
 
-ENCOUNTER_MONSTER = """
-<!-- Curly braces let us inject values into the string -->
-You are in {}. You found a monster!<br>
-
-<!-- Image taken from site that generates random Corgi pictures-->
-<img src="http://placecorgi.com/260/180" /><br>
-    
-What is its name?
-
-<!-- Form allows you to have more text entry -->    
-<form action="/save/name/">
-    <input type="text" name="player"><br>
-    <input type="submit" value="Submit"><br>
-</form>
-"""
-
-
 @simple_route('/goto/<where>/')
 def open_door(world: dict, where: str) -> str:
     if where == 'takeout':
@@ -39,10 +22,17 @@ def open_door(world: dict, where: str) -> str:
 def search_food(world: dict, food: str):
     response = requests.get('https://www.themealdb.com/api/json/v1/1/search.php?s=' + food)
     data = json.loads(response.text)
-    possible_foods = " "
+    possible_foods = []
     for meal in data['meals']:
-        possible_foods = possible_foods + "<p>" + (meal['strMeal']) + "</p>"
-    return render_template("heading.html", code=Markup(possible_foods))
+        possible_foods.append(meal['strMeal'])
+    return choose_food(world, possible_foods)
+
+def choose_food(world: dict, possible_foods: list):
+    html = '''<select id='food_select'>'''
+    for food in possible_foods:
+        html = html + '''<option value={food}>{food}</option>'''.format(food=food)
+    html = html + '</select>'
+    return Markup(html)
 
 @simple_route("/save/name/")
 def save_name(world: dict, monsters_name: str) -> str:
