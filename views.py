@@ -27,25 +27,14 @@ def search_food(world: dict, food: str):
         possible_foods.append(meal['strMeal'])
     return choose_food(world, possible_foods)
 
+@simple_route('/add_to_collection/<food>')
+def add_to_collection(world: dict, food: str):
+    return Markup(('<p>hehe</p>').format(food=food))
+
 def choose_food(world: dict, possible_foods: list):
-    html = '''<select id='food_select'>'''
+    html = '''<form>
+    <select id='food_select'>'''
     for food in possible_foods:
         html = html + '''<option value={food}>{food}</option>'''.format(food=food)
-    html = html + '</select>'
-    return Markup(html)
-
-@simple_route("/save/name/")
-def save_name(world: dict, monsters_name: str) -> str:
-    """
-    Update the name of the monster.
-
-    :param world: The current world
-    :param monsters_name:
-    :return:
-    """
-    world['name'] = monsters_name
-
-    return GAME_HEADER+"""You are in {where}, and you are nearby {monster_name}
-    <br><br>
-    <a href='/'>Return to the start</a>
-    """.format(where=world['location'], monster_name=world['name'])
+    html = html + '</select><input type="button" value="Select" onclick="select()"></form>'
+    return render_template("food_list.html", list=Markup(html))
