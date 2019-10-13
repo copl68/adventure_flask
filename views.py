@@ -29,12 +29,13 @@ def search_food(world: dict, food: str):
 
 @simple_route('/add_to_collection/<food>')
 def add_to_collection(world: dict, food: str):
-    return Markup(('<p>hehe</p>').format(food=food))
+    world['foods'] = [].append(food)
+    return world['foods']
 
 def choose_food(world: dict, possible_foods: list):
     html = '''<form>
     <select id='food_select'>'''
     for food in possible_foods:
-        html = html + '''<option value={food}>{food}</option>'''.format(food=food)
-    html = html + '</select><input type="button" value="Select" onclick="select()"></form>'
+        html = html + '''<option value="{food}">{food}</option>'''.format(food=food)
+    html = html + '</select><button type="button" onclick="select()">Select</button></form>'
     return render_template("food_list.html", list=Markup(html))
