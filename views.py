@@ -6,6 +6,7 @@ from flask import render_template, Markup
 
 @simple_route('/')
 def hello(world: dict) -> str:
+    world['foods'] = []
     return render_template("entering.html")
 
 @simple_route('/goto/<where>/')
@@ -29,8 +30,11 @@ def search_food(world: dict, food: str):
 
 @simple_route('/add_to_collection/<food>')
 def add_to_collection(world: dict, food: str):
-    world['foods'] = [].append(food)
-    return world['foods']
+    length = len(world['foods'])
+    if length >= 3:
+        pass
+    elif 0 <= length < 3:
+        pass
 
 def choose_food(world: dict, possible_foods: list):
     html = '''<form>

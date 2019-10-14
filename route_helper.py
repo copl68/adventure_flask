@@ -12,7 +12,7 @@ from flask import request, session, redirect
 
 from app import app
 
-INITIAL_WORLD = {'foods': []}
+INITIAL_WORLD = {}
 
 
 def simple_route(path: str, **options):
