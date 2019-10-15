@@ -30,16 +30,29 @@ def search_food(world: dict, food: str):
 
 @simple_route('/add_to_collection/<food>')
 def add_to_collection(world: dict, food: str):
-    length = len(world['foods'])
-    if length >= 3:
-        pass
-    elif 0 <= length < 3:
-        pass
+    world['foods'].append(food)
+    message = '''
+    <p>Success! Do you want to add another food?</p>
+    <button type='button' onclick='/goto/dinein/' >Yes</button><button type='button' onclick='/end/' >No</button> 
+    '''
+    return render_template('heading.html', code=Markup(message))
+
+@simple_route('/swap_foods/<food>')
+def swap_foods(world: dict, food: str):
+    pass
+
+@simple_route('/end/')
+def end(world: dict):
+    pass
 
 def choose_food(world: dict, possible_foods: list):
     html = '''<form>
     <select id='food_select'>'''
     for food in possible_foods:
         html = html + '''<option value="{food}">{food}</option>'''.format(food=food)
-    html = html + '</select><button type="button" onclick="select()">Select</button></form>'
-    return render_template("food_list.html", list=Markup(html))
+    if len(world['foods']) >= 3:
+        html = html + '</select><button type="button" onclick="too_many()">Select</button></form>'
+        return render_template("food_list.html", list=Markup(html))
+    elif 0 <= len(world['foods']) < 3:
+        html = html + '</select><button type="button" onclick="select()">Select</button></form>'
+        return render_template("food_list.html", list=Markup(html))

@@ -7,4 +7,11 @@
         window.location.href = '/add_to_collection/'.concat(x)
     }
     </script>
+    <script>
+    function too_many(){
+        alert("You are already carrying 3 foods")
+        var x = document.getElementById('food_select').value
+        window.location.href = '/swap_foods/'.concat(x)
+    }
+    </script>
 {%  endblock %}
