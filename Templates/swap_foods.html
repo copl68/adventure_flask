@@ -1,0 +1,10 @@
+{% extends "heading.html" %}
+{% block input %}
+    <p>Which food would you like to swap with {{ food }}?</p>
+    <form action='/swap_foods/{{ food }}'>
+    <input type="radio" name="food" value="0">{{ food1 }}<br>
+    <input type="radio" name="food" value="1">{{ food2 }}<br>
+    <input type="radio" name="food" value="2">{{ food3 }}<br>
+    <input type="submit" value="Swap">
+    </form>
+{% endblock %}
