@@ -22,12 +22,16 @@ def open_door(world: dict, where: str) -> str:
 
 @simple_route('/search_food/<food>/')
 def search_food(world: dict, food: str):
-    response = requests.get('https://www.themealdb.com/api/json/v1/1/search.php?s=' + food)
-    data = json.loads(response.text)
-    possible_foods = []
-    for meal in data['meals']:
-        possible_foods.append(meal['strMeal'])
-    return choose_food(world, possible_foods)
+    try:
+        response = requests.get('https://www.themealdb.com/api/json/v1/1/search.php?s=' + food)
+        data = json.loads(response.text)
+        possible_foods = []
+        for meal in data['meals']:
+            possible_foods.append(meal['strMeal'])
+        return choose_food(world, possible_foods)
+    except:
+        food_list = get_current_foods(world)
+        return render_template('food_not_found.html', food=food.lower(), foods=Markup(food_list))
 
 @simple_route('/add_to_collection/<food>')
 def add_to_collection(world: dict, food: str):
