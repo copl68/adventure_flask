@@ -1,0 +1,19 @@
+{% extends "current_foods.html" %}
+{% block input %}
+    {{ from_full }}
+    <p>You only have the ability to carry 3 foods back to the table with you.</p><br>
+    <h4>What kind of food do you feel like eating?</h4>
+    <p>(Keep it simple... Something like soup, chicken, pie, etc)</p>
+    
+    <form>
+    <input type="search" id="food_search" placeholder="Search food...">
+    <input type="Button" id="food" value="Search" onclick='search()'>
+    </form>
+    <script>
+    function search(){
+        var x = document.getElementById('food_search').value
+        window.location.href = '/search_food/'.concat(x)
+    }
+    </script>
+
+{% endblock %}
