@@ -38,7 +38,7 @@ def add_to_collection(world: dict, food: str):
     world['foods'].append(food)
     food_list = get_current_foods(world)
     message = '''
-    <p>Success! Do you want to add another food?</p>
+    <p><span class='text-success'><strong>Success!</strong></span> Do you want to add another food?</p>
     <button type='button' onclick="window.location.href = '/goto/dinein/'" >Yes</button><br><button type='button' onclick="window.location.href = '/end/'" >No</button> 
     '''
     return render_template('current_foods.html', code=Markup(message), foods=Markup(food_list))
