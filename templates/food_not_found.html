@@ -1,5 +1,7 @@
 {% extends 'current_foods.html' %}
 {% block input %}
+    <div style="text-align: center"><br><br>
     <p>They are not serving <strong>{{ food }}</strong> today, sorry!</p>
     <a href="/goto/dinein">Find another food</a>
+    <div>
 {% endblock %}

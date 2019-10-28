@@ -1,4 +1,12 @@
 {% extends "current_foods.html" %}
 {% block input %}
-<p>Grab a seat and enjoy your <strong>{{ food1 }}, {{ food2 }}</strong>, and <strong>{{ food3 }}</strong>!</p>
+    <div style="text-align: center">
+    {% if (num_of_foods == 1) %}
+        <p>Grab a seat and enjoy your <strong>{{ food[0] }}!</p>
+    {% elif (num_of_foods == 2) %}
+        <p>Grab a seat and enjoy your <strong>{{ food[0] }}</strong>, and <strong>{{ food[1] }}</strong>!</p>
+    {% else %}
+        <p>Grab a seat and enjoy your <strong>{{ food[0] }}, {{ food[1] }}</strong>, and <strong>{{ food[2] }}</strong>!</p>
+    {% endif %}
+    </div>
 {% endblock %}
