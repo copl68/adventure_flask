@@ -39,7 +39,7 @@ def add_to_collection(world: dict, food: str):
     food_list = get_current_foods(world)
     message = '''
     <div style="text-align: center"><br><p><span class='text-success'><strong>Success!</strong></span> Do you want to add another food?</p>
-    <button type='button' onclick="window.location.href = '/goto/dinein/'" >Yes</button><br><button type='button' onclick="window.location.href = '/end/'" >No</button></div> 
+    <button type='button' class="button btn btn-success" onclick="window.location.href = '/goto/dinein/'" >Yes</button><button class="button btn btn-danger" type='button' onclick="window.location.href = '/end/'" >No</button></div> 
     '''
     return render_template('current_foods.html', code=Markup(message), foods=Markup(food_list))
 
@@ -53,8 +53,10 @@ def swap_foods(world: dict, *args, new_food: str=''):
     world['foods'][int(request.values.get('food'))] = new_food
     food_list = get_current_foods(world)
     message = '''
-    <div style="text-align: center"><br><p><span class='text-success'><strong>Success!</strong></span> Do you want to add another food?</p>
-    <button type='button' onclick="window.location.href = '/goto/dinein/'" >Yes</button><br><button type='button' onclick="window.location.href = '/end/'" >No</button></div> 
+    <div style="text-align: center">
+    <br><p><span class='text-success'><strong>Success!</strong></span> Do you want to add another food?</p>
+    <button type='button' class="button btn btn-success" onclick="window.location.href = '/goto/dinein/'" >Yes</button><button class="button btn btn-danger" type='button' onclick="window.location.href = '/end/'" >No</button>
+    </div> 
     '''
     return render_template('current_foods.html', code=Markup(message), foods=Markup(food_list))
 

@@ -1,10 +1,14 @@
 {% extends "current_foods.html" %}
 {% block input %}
+    <div style="margin: auto; text-align: center">
     <p>Which food would you like to swap with {{ food }}?</p>
-    <form action='/swap_foods/{{ food }}'>
+    <div style="margin: auto; width:230px; text-align:left;">
+        <form action='/swap_foods/{{ food }}'>
     <input type="radio" name="food" value="0">{{ food1 }}<br>
     <input type="radio" name="food" value="1">{{ food2 }}<br>
     <input type="radio" name="food" value="2">{{ food3 }}<br>
-    <input type="submit" value="Swap">
+    <input class="button btn btn-dark" type="submit" value="Swap">
     </form>
+    </div>
+    </div>
 {% endblock %}
