@@ -66,6 +66,54 @@ def end(world: dict):
     num_of_foods = len(world['foods'])
     return render_template('ending.html', foods=Markup(food_list), num_of_foods=num_of_foods, food=world['foods'])
 
+@simple_route('/allergy_search/<allergic_ingredient>/')
+def allergy_search(world: dict, allergic_ingredient: str):
+    food_list = get_current_foods(world)
+    foods_allergic_to = []
+    allergies = {}
+    for food in world['foods']:
+        allergies[food] = []
+        food_for_url = food.replace(' ', '%20')
+        response = requests.get('https://www.themealdb.com/api/json/v1/1/search.php?s=' + food_for_url)
+        data = json.loads(response.text)
+        food_ingredients = []
+        ingredient_num = 1
+        for meal in data['meals']:
+            if food == meal['strMeal']:
+                while (ingredient_num <= 20):
+                    food_ingredients.append(meal['strIngredient' + str(ingredient_num)])
+                    ingredient_num += 1
+                for ingredient in food_ingredients:
+                    if allergic_ingredient.lower() in ingredient.lower():
+                        foods_allergic_to.append(food)
+                        allergies[food].append(ingredient)
+                    elif (allergic_ingredient[0:-1]).lower() in ingredient.lower():
+                        foods_allergic_to.append(food)
+                        allergies[food].append(ingredient)
+
+    foods_allergic_to = list(dict.fromkeys(foods_allergic_to))
+
+    if not foods_allergic_to:
+        html = "<p>Your foods do not contain any " + allergic_ingredient + "</p><br><a class='btn btn-dark' role='button' href='/end/'>Go Back</a>"
+        return render_template("allergic_foods.html", html=Markup(html), foods=Markup(food_list))
+
+    for meal in allergies.copy():
+        if not allergies[meal]:
+            allergies.pop(meal)
+
+    for food in foods_allergic_to:
+        world['foods'].remove(food)
+
+    html = ''
+    for meal in allergies:
+        html += "<p>Ingredients in <strong>" + meal + "</strong> that contain <strong>" + allergic_ingredient + "</strong>:</p>"
+        for ingredient in allergies[meal]:
+           html += "<p>" + ingredient + "</p>"
+    html += "<br><p>We have removed these meals from your tray so that you do not die</p><br><a class='btn btn-dark' role='button' href='/goto/dinein'>Find safer foods</a>"
+
+    food_list = get_current_foods(world)
+    return render_template("allergic_foods.html", html=Markup(html), foods=Markup(food_list))
+
 def choose_food(world: dict, possible_foods: list):
     food_list = get_current_foods(world)
     html = '''<div style="text-align: center"><br><br><form>

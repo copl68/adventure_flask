@@ -3,10 +3,31 @@
     <div style="text-align: center">
     {% if (num_of_foods == 1) %}
         <p>Grab a seat and enjoy your <strong>{{ food[0] }}!</p>
+        <br><p><i>Have allergies? Search ingredients you're allergic to to see if they're in your meal.</i></p>
+        <form>
+        <input type="search" id="ingredient_search" placeholder="Search ingredient...">
+        <input type="Button" class="button btn btn-dark" id="food" value="Search" onclick='search()'>
+        </form>
     {% elif (num_of_foods == 2) %}
-        <p>Grab a seat and enjoy your <strong>{{ food[0] }}</strong>, and <strong>{{ food[1] }}</strong>!</p>
+        <h5>Grab a seat and enjoy your <strong>{{ food[0] }}</strong>, and <strong>{{ food[1] }}</strong>!</h5>
+        <br><p><i>Have allergies? Search ingredients you're allergic to to see if they're in your meal.</i></p>
+        <form>
+        <input type="search" id="ingredient_search" placeholder="Search ingredient...">
+        <input type="Button" class="button btn btn-dark" id="food" value="Search" onclick='search()'>
+        </form>
     {% else %}
         <p>Grab a seat and enjoy your <strong>{{ food[0] }}, {{ food[1] }}</strong>, and <strong>{{ food[2] }}</strong>!</p>
+        <br><p><i>Have allergies? Search ingredients you're allergic to to see if they're in your meal.</i></p>
+        <form>
+        <input type="search" id="ingredient_search" placeholder="Search ingredient...">
+        <input type="Button" class="button btn btn-dark" id="food" value="Search" onclick='search()'>
+        </form>
     {% endif %}
     </div>
+    <script>
+    function search(){
+        var x = document.getElementById('ingredient_search').value
+        window.location.href = '/allergy_search/'.concat(x)
+    }
+    </script>
 {% endblock %}
