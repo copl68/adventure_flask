@@ -151,7 +151,7 @@ def allergy_search(world: dict, allergic_ingredient: str):
     foods_allergic_to = list(dict.fromkeys(foods_allergic_to))
 
     if not foods_allergic_to:
-        html = "<p>Your foods do not contain any " + allergic_ingredient + "</p><br><a class='btn btn-dark' role='button' href='/end/'>Go Back</a>"
+        html = "<p>Your foods do not have " + allergic_ingredient + "listed as an ingredient</p><br><a class='btn btn-dark' role='button' href='/end/'>Go Back</a>"
         return render_template("allergic_foods.html", html=Markup(html), foods=Markup(food_list))
 
     #removed meals that do not have ingredients that the user is allergic to
