@@ -143,7 +143,7 @@ def allergy_search(world: dict, allergic_ingredient: str):
                     if allergic_ingredient.lower() in ingredient.lower():
                         foods_allergic_to.append(food)
                         allergies[food].append(ingredient)
-                    elif (allergic_ingredient[0:-1]).lower() in ingredient.lower():
+                    elif allergic_ingredient[-1].lower() == "s" and ((allergic_ingredient[0:-1]).lower() in ingredient.lower()):
                         foods_allergic_to.append(food)
                         allergies[food].append(ingredient)
 
